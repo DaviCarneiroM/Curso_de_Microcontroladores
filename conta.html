@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta - Curso de Microcontroladores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --branco: #FFFFFF;
+            --cinza: #8d8d8d;
+            --preto: #000000;
+            --cor-principal: #0F7391;
+            --cor-principal-sombra: #063746;
+            --cor-secundária: #F5C503;
+            --cor-secundária-sombra: #645102;
+            --cor-de-fundo: #131313;
+            --fonte-principal: "Google Sans Flex", sans-serif;
+            --fonte-secundária: "Press Start 2P", system-ui;
+        }
+
+        body {
+            background-color: var(--cor-de-fundo);
+            color: var(--branco);
+            font-family: var(--fonte-principal);
+        }
+
+        /*Cabeçalho*/
+
+        header {
+            background-color: var(--cor-principal);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+            width: 100%;
+            box-shadow: 0px 0px 100px var(--preto);
+        }
+
+        .header_esquerda {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1em;
+        }
+
+        .header_direita {
+            display: flex;
+            gap: 2em;
+        }
+
+        .header_direita_item {
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 1.25rem;
+        }
+
+        /*Conteúdo*/
+
+        .conteúdo {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3em;
+            height: 50vh;
+            border-bottom: 10px solid var(--cor-principal);
+        }
+
+        .conteúdo_emcima {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            margin-left: 2em;
+        }
+
+        .conteúdo_embaixo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3em;
+        }
+
+        .conteúdo_item {
+            display: flex;
+            gap: 1em;
+            padding: 1em;
+            width: 27vw;
+            background: var(--cor-principal);
+            color: var(--branco);
+            text-decoration: none;
+            border-radius: 20px;
+            box-shadow: 5px 5px 0px var(--cor-principal-sombra);
+            transition: 0.5s;
+        }
+
+        .conteúdo_item_do_item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 10vh;
+        }
+
+        .conteúdo_item:hover {
+            transform: scale(110%);
+        }
+
+        /*Segundo conteúdo*/
+
+        .segundo_conteúdo {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3em;
+            height: 50vh;
+            border-top: 10px solid var(--cor-principal-sombra);
+            border-bottom: 10px solid var(--cor-secundária);
+        }
+
+        .segundo_conteúdo_emcima {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            margin-left: 2em;
+        }
+
+        .segundo_conteúdo_embaixo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3em;
+        }
+
+        .segundo_conteúdo_item {
+            display: flex;
+            gap: 1em;
+            padding: 1em;
+            width: 27vw;
+            background: var(--cor-secundária);
+            color: var(--branco);
+            text-decoration: none;
+            border-radius: 20px;
+            box-shadow: 5px 5px 0px var(--cor-secundária-sombra);
+            transition: 0.5s;
+        }
+
+        .segundo_conteúdo_item_do_item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 15vh;
+        }
+
+        .segundo_conteúdo_item:hover {
+            transform: scale(110%);
+        }
+
+        /*Rodapé*/
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--preto);
+            padding: 3em;
+            color: var(--branco);
+            border-top: 10px solid var(--cor-secundária-sombra);
+        }
+
+        .footer_primeira_parte {
+            display: flex;
+            flex-direction: column;
+            width: 25vw;
+            gap: 0.5em;
+        }
+
+        .footer_segunda_parte {
+            background-color: var(--branco);
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            border: 3px solid var(--cor-secundária);   
+            gap: 1em; 
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header_esquerda">
+            <a href="index.html">
+                <img src="imagens/usuário.png" alt="Imagem genérica para foto de perfil" style="width: 5vw;">
+            </a>
+            <span style="font-family: 'Press Start 2P', system-ui; font-size: 2rem; text-shadow: 2px 2px 0px #000000;">
+                Fulano
+            </span>
+        </div>
+        <div class="header_direita">
+            <a class="header_direita_item" href="#"><strong>PERFIL DO USUÁRIO</strong></a>
+            <a class="header_direita_item" href="#"><strong>CONTEÚDO</strong></a>
+            <a class="header_direita_item" href="#"><strong>UTFPR & CROMO</strong></a>
+            <a class="header_direita_item" href="index.html"><strong>SAIR</strong></a>
+        </div>
+    </header> 
+
+    <section class="conteúdo">
+        <div class="conteúdo_emcima">
+            <h1>Olá <strong style="font-family: 'Press Start 2P', system-ui; color: var(--cor-secundária); text-shadow: 4px 4px 0px var(--cor-secundária-sombra);">fulano</strong>!</h1>
+            <h2>Confira aqui o progresso de seus cursos:</h2>
+        </div>
+        <div class="conteúdo_embaixo">
+            <a class="conteúdo_item" href="arduino.html">
+                <h1 style="font-size: 10vh; text-shadow: 3px 3px 0px var(--cinza);">30%</h1>
+                <div class="conteúdo_item_do_item">
+                    <h2>Trilha Arduino</h2>
+                    <p>O básico de microcontroladores</p>
+                </div>
+            </a>
+            <a class="conteúdo_item" href="#">
+                <h1 style="font-size: 10vh; text-shadow: 3px 3px 0px var(--cinza);">56%</h1>
+                <div class="conteúdo_item_do_item">
+                    <h2>Trilha ESP32</h2>
+                    <p>O nível intermediário que não deixa na mão</p>
+                </div>
+            </a>
+            <a class="conteúdo_item" href="#">
+                <h1 style="font-size: 10vh; text-shadow: 3px 3px 0px var(--cinza);">21%</h1>
+                <div class="conteúdo_item_do_item">
+                    <h2>Trilha Blackpill</h2>
+                    <p>Nível mais avançado, recomendado fazer os outros cursos</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="segundo_conteúdo">
+        <div class="segundo_conteúdo_emcima">
+            <h2>Não se esqueça de fazer os exercício para praticar:</h1>
+        </div>
+        <div class="segundo_conteúdo_embaixo">
+            <a class="segundo_conteúdo_item" href="#">
+                <div class="segundo_conteúdo_item_do_item">
+                    <h2>Trilha Arduino</h2>
+                    <p>Questão 4: Qual a capacidade de corrente que um Arduino UNO pode...</p>
+                </div>
+                <h1 style="font-size: 10vh; text-shadow: 3px 3px 0px var(--cinza);">3/10</h1>
+
+            </a>
+            <a class="segundo_conteúdo_item" href="#">
+                <div class="segundo_conteúdo_item_do_item">
+                    <h2>Trilha ESP32</h2>
+                    <p>Questão 6: Qual desses diagramas representam a sequencia de...</p>
+                </div>
+                <h1 style="font-size: 10vh; text-shadow: 3px 3px 0px var(--cinza);">5/10</h1>
+
+            </a>
+            <a class="segundo_conteúdo_item" href="#">
+                <div class="segundo_conteúdo_item_do_item">
+                    <h2>Trilha Blackpill</h2>
+                    <p>Inicie agora sua jornada com exercícios sobre blackpill!</p>
+                </div>
+                <h1 style="font-size: 10vh; text-shadow: 3px 3px 0px var(--cinza);">0/10</h1>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_primeira_parte">
+            <h1 style="font-size: 1rem;">Trabalho para a disciplina Fundamentos de Gestão de Projetos.</h1>
+            <p style="font-size: 1rem;">Programação do site por Davi Carneiro Mendes com colaboração de: André Lourenço, Bruno Zanetti, Bernardo André, Eduardo Henrique e Iago Senegalia</p>
+        </div>
+        <div class="footer_segunda_parte">
+            <img src="imagens/logoUTFPR.png" alt="Logo da UTFPR" style="width: 5vw;">
+            <img src="imagens/cromo.png" alt="Logo da empresa júnior Cromo" style="width: 5vw;">
+        </div>
+    </footer>
+</body>
+</html>

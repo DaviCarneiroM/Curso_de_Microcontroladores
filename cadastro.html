@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Curso de Microcontroladores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --branco: #FFFFFF;
+            --cinza: #4b4b4b;
+            --preto: #000000;
+            --cor-principal: #0F7391;
+            --cor-principal-sombra: #063746;
+            --cor-secundária: #F5C503;
+            --cor-secundária-sombra: #645102;
+            --cor-de-fundo: linear-gradient(0deg,rgba(245, 197, 3, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            --fonte-principal: "Google Sans Flex", sans-serif;
+            --fonte-secundária: "Press Start 2P", system-ui;
+        }
+
+        body {
+            background-color: var(--cor-de-fundo);
+            color: var(--branco);
+            font-family: var(--fonte-principal);
+        }
+
+        /*Formulário*/
+
+        section {
+            background: var(--cor-de-fundo);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            z-index: 0;
+        }
+
+        .container {
+            display: flex;
+            border-radius: 15px;
+            box-shadow: 0 0 0 1em #ffffff34, 0 0 0 2em #ffffff27;
+            z-index: 1;
+        }
+
+        .container_esquerdo {
+            border-radius: 15px;
+            background: var(--branco);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--preto);
+            padding: 2em;
+            gap: 1em;
+            margin-right: -2em;
+            z-index: 2;
+            height: 75vh;
+        }
+
+        .container_esquerdo_item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            width: 100%;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+        
+        .formulário_item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25em;
+        }
+
+        .formulário_login,
+        .formulário_senha {
+            background: transparent;
+            border-radius: 3em;
+            padding: 1em;
+            width: 100%;
+            border: none;
+            outline: 1px solid var(--cinza);
+            color: var(--preto);
+        }
+        
+        .formulário_login:focus,
+        .formulário_senha:focus {
+            outline: 1px solid var(--cor-secundária);
+        }
+
+        .formulário_enviar {
+            background-color: #F5C503;
+            border-radius: 3em;
+            cursor: pointer;
+            padding: 0.75em;
+            border: none;
+            margin-top: 1em;
+        }
+
+        .formulário_enviar:hover {
+            background-color: #645102;
+        }
+
+        .container_direito {
+            height: 75vh;
+            z-index: 1;
+        }
+
+        /*Rodapé*/
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--preto);
+            padding: 3em;
+            color: var(--cor-secundária);
+        }
+
+        .footer_primeira_parte {
+            display: flex;
+            flex-direction: column;
+            width: 25vw;
+            gap: 0.5em;
+        }
+
+        .footer_segunda_parte {
+            background-color: var(--branco);
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            border: 3px solid var(--cor-secundária);   
+            gap: 1em; 
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <div class="container_esquerdo">
+                <div class="container_esquerdo_item">
+                    <img src="imagens/logoUTFPR.png" alt="Logo da UTFPR" style="width: 10vw;">
+                    <h1 style="color: var(--cor-secundária); text-shadow: 2px 2px 0px var(--cor-secundária-sombra);">Já possui uma conta?</h1>
+                    <p>Faça seu login e boa aula!</p>
+                </div>
+                <div class="container_esquerdo_item">
+                    <form class="formulário" action="conta.html">
+                        <div class="formulário_item">
+                            <label for="login">Login</label>
+                            <input class="formulário_login" id="login" type="text" placeholder="Seu Login" autocomplete="off">
+                        </div>
+                        <div class="formulário_item">
+                            <label for="senha">Senha</label>
+                            <input class="formulário_senha" id="senha" type="password" placeholder="*********" autocomplete="off">
+                        </div>
+                        <div class="formulário_item">
+                            <input class="formulário_enviar" type="submit" value="ENTRAR">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="container_direito">
+                <img src="imagens/imagemUTFPR.png" alt="Fotografia da UTFPR sede centro" style="height: 100%; border-radius: 15px;">
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_primeira_parte">
+            <h1 style="font-size: 1rem;">Trabalho para a disciplina Fundamentos de Gestão de Projetos.</h1>
+            <p style="font-size: 1rem;">Programação do site por Davi Carneiro Mendes com colaboração de: André Lourenço, Bruno Zanetti, Bernardo André, Eduardo Henrique e Iago Senegalia</p>
+        </div>
+        <div class="footer_segunda_parte">
+            <img src="imagens/logoUTFPR.png" alt="Logo da UTFPR" style="width: 5vw;">
+            <img src="imagens/cromo.png" alt="Logo da empresa júnior Cromo" style="width: 5vw;">
+        </div>
+    </footer>
+</body>
+</html>

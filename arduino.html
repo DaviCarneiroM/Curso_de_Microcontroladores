@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino - Curso de Microcontroladores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --branco: #FFFFFF;
+            --cinza: #4b4b4b;
+            --preto: #000000;
+            --cor-principal: #0F7391;
+            --cor-principal-sombra: #063746;
+            --cor-secundária: #F5C503;
+            --cor-secundária-sombra: #645102;
+            --cor-de-fundo: #131313;
+            --fonte-principal: "Google Sans Flex", sans-serif;
+            --fonte-secundária: "Press Start 2P", system-ui;
+        }
+
+        body {
+            background-color: var(--cor-de-fundo);
+            color: var(--branco);
+            font-family: var(--fonte-principal);
+        }
+
+        /*Cabeçalho*/
+
+        header {
+            background-color: var(--cor-principal);
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            width: 100%;
+            box-shadow: 0px 0px 100px var(--preto);
+        }
+
+        /*Principal*/
+
+        .principal {
+            display: flex;
+            height: 140vh;
+            width: 100%;
+        }
+
+        .principal_navegação {
+            height: 140vh;
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--preto);
+        }
+
+        .principal_navegação_item {
+            padding: 1em;
+            background-color: var(--cor-de-fundo);
+            display: flex;
+            align-items: center;
+            border-top: 4px solid var(--preto);
+            border-bottom: 4px solid var(--preto);
+            border-right: 8px solid var(--preto);
+            border-radius: 0px 0px 25px 0px;
+            color: var(--branco);
+            text-decoration: none;
+        }
+
+        .principal_navegação_item:hover {
+            color: var(--cor-principal);
+        }
+
+        .principal_principal {
+            display: flex;
+            flex-direction: column;
+            padding: 2em;
+            width: 75%;
+            gap: 2em;
+        }
+
+        .principal_emcima {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+
+        .principal_embaixo {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+            background-color: var(--cor-principal);
+            padding: 1em;
+            box-shadow: 10px 10px 0px var(--cor-principal-sombra);
+        }
+
+        /*Rodapé*/
+
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--cor-principal);
+            padding: 3em;
+            color: var(--preto);
+        }
+
+        .footer_primeira_parte {
+            display: flex;
+            flex-direction: column;
+            width: 25vw;
+            gap: 0.5em;
+        }
+
+        .footer_segunda_parte {
+            background-color: var(--branco);
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            border: 3px solid var(--preto);   
+            gap: 1em; 
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <a href="conta.html">
+            <img src="imagens/logoUTFPR.png" alt="Logo da UTFPR" style="width: 7.5vw;">
+        </a>
+    </header>
+
+    <section class="principal">
+        <nav class="principal_navegação">
+            <a class="principal_navegação_item" href="arduino.html">O que é um Arduino?</a>
+            <a class="principal_navegação_item" href="#">Portas de um Arduino</a>
+            <a class="principal_navegação_item" href="#">Programação com Arduino 1</a>
+            <a class="principal_navegação_item" href="#">Programação com Arduino 2</a>
+            <a class="principal_navegação_item" href="#">Montagem com Arduino</a>
+        </nav>
+        <div class="principal_principal">
+            <div class="principal_emcima">
+                <h1 style="font-family: 'Press Start 2P', system-ui; color: var(--cor-principal); text-shadow: 4px 4px 0px var(--cor-principal-sombra);">Aula 1: O que é um Arduino?</h1>
+                <iframe width="853" height="480" src="https://www.youtube.com/embed/sv9dDtYnE1g" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="principal_embaixo">
+                <h2 style="font-family: 'Press Start 2P', system-ui; color: var(--cor-secundária); text-shadow: 2px 2px 0px var(--cor-secundária-sombra);">Resumo:</h2>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;O Arduino é um ecossistema de computação física baseado em microcontroladores de arquitetura RISC (frequentemente AVR ou ARM) que integra um bootloader proprietário para simplificar o flashing de firmware via interface USB-Serial sem a necessidade de gravadores externos. A plataforma disponibiliza pinos de GPIO (General Purpose Input/Output), conversores analógico-digitais (ADC) de 10 bits e canais de PWM (Pulse Width Modulation), suportando protocolos de comunicação serial como I2C, SPI e UART. No nível de software, ele utiliza uma camada de abstração de hardware (HAL) baseada em Wiring, permitindo que o código escrito em C++ seja compilado e executado em uma estrutura determinística de ciclo infinito, processando interrupções e sinais de periféricos em tempo real.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_primeira_parte">
+            <h1 style="font-size: 1rem;">Trabalho para a disciplina Fundamentos de Gestão de Projetos.</h1>
+            <p style="font-size: 1rem;">Programação do site por Davi Carneiro Mendes com colaboração de: André Lourenço, Bruno Zanetti, Bernardo André, Eduardo Henrique e Iago Senegalia</p>
+        </div>
+        <div class="footer_segunda_parte">
+            <img src="imagens/logoUTFPR.png" alt="Logo da UTFPR" style="width: 5vw;">
+            <img src="imagens/cromo.png" alt="Logo da empresa júnior Cromo" style="width: 5vw;">
+        </div>
+    </footer>
+</body>
+</html>
