@@ -148,14 +148,14 @@ header {
 
 .sobre_nos_cima {
     display: flex;
-    justify-content: space-between;
-    gap: 2em;
+    justify-content: space-around;
+    gap: 3em;
 }
 
 .sobre_nos_baixo {
     display: flex;
-    justify-content: space-between;
-    gap: 2em;
+    justify-content: space-around;
+    gap: 3em;
 }
 
 .sobre_nos_item {
