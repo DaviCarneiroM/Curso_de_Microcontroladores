@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário Arduino - Curso de Microcontroladores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        :root {
+            --branco: #FFFFFF;
+            --cinza: #4b4b4b;
+            --preto: #000000;
+            --cor-principal: #0F7391;
+            --cor-principal-sombra: #063746;
+            --cor-secundária: #F5C503;
+            --cor-secundária-sombra: #645102;
+            --cor-de-fundo: #131313;
+            --fonte-principal: "Google Sans Flex", sans-serif;
+            --fonte-secundária: "Press Start 2P", system-ui;
+        }
+
+        body {
+            background-color: var(--cor-de-fundo);
+            color: var(--branco);
+            font-family: var(--fonte-principal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--cor-principal);
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            box-shadow: 0px 0px 100px var(--preto);
+        }
+
+        /* Layout principal */
+        .principal {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Navegação lateral */
+        nav {
+            width: 25%;
+            background-color: var(--preto);
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .nav_item {
+            padding: 1em;
+            background-color: var(--cor-de-fundo);
+            display: flex;
+            align-items: center;
+            border-top: 4px solid var(--preto);
+            border-bottom: 4px solid var(--preto);
+            border-right: 8px solid var(--preto);
+            border-radius: 0 0 25px 0;
+            color: var(--branco);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav_item:hover { color: var(--cor-principal); }
+        .nav_item.ativo { color: var(--cor-secundária); border-right-color: var(--cor-secundária); }
+
+        /* Área do questionário */
+        .conteudo {
+            width: 75%;
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5em;
+        }
+
+        .conteudo h1 {
+            font-family: var(--fonte-secundária);
+            color: var(--cor-principal);
+            text-shadow: 4px 4px 0px var(--cor-principal-sombra);
+            font-size: 1rem;
+        }
+
+        /* Barra de progresso */
+        .progresso {
+            display: flex;
+            gap: 4px;
+        }
+
+        .progresso_ponto {
+            flex: 1;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--cinza);
+            transition: background 0.3s;
+        }
+
+        .progresso_ponto.feito { background: var(--cor-principal); }
+
+        /* Card da questão */
+        .questao_card {
+            background-color: var(--preto);
+            padding: 1.5em;
+            box-shadow: 10px 10px 0px var(--cor-principal-sombra);
+            display: none;
+            flex-direction: column;
+            gap: 1em;
+            animation: aparecer 0.2s ease;
+        }
+
+        .questao_card.ativa { display: flex; }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .questao_label {
+            font-size: 0.85rem;
+            color: var(--cinza);
+        }
+
+        .questao_texto {
+            font-size: 1.1rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* Opções */
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .opcoes label { cursor: pointer; }
+        .opcoes input[type="radio"] { display: none; }
+
+        .opcao {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75em 1em;
+            border: 2px solid var(--cinza);
+            border-radius: 4px;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .opcoes label:hover .opcao {
+            border-color: var(--cor-principal);
+            background: rgba(15, 115, 145, 0.15);
+        }
+
+        .opcoes input[type="radio"]:checked + .opcao {
+            border-color: var(--cor-principal);
+            background: rgba(15, 115, 145, 0.25);
+            color: var(--branco);
+        }
+
+        .opcoes input[type="radio"]:checked + .opcao .opcao_letra {
+            background: var(--cor-principal);
+            border-color: var(--cor-principal);
+            color: var(--branco);
+        }
+
+        .opcao_letra {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--cinza);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        /* Navegação do quiz */
+        .quiz_nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz_nav button {
+            padding: 0.6em 1.4em;
+            border: 2px solid var(--cinza);
+            background: transparent;
+            color: var(--branco);
+            cursor: pointer;
+            font-family: var(--fonte-principal);
+            font-size: 0.9rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .quiz_nav button:hover { background: var(--cinza); }
+        .quiz_nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .quiz_nav button.primario {
+            background: var(--cor-principal);
+            border-color: var(--cor-principal);
+            box-shadow: 4px 4px 0px var(--cor-principal-sombra);
+        }
+
+        .quiz_nav button.primario:hover { background: var(--cor-principal-sombra); }
+
+        .quiz_contador { font-size: 0.85rem; color: var(--cinza); }
+
+        /* Resultado */
+        .resultado {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5em;
+            padding: 2em;
+            background-color: var(--preto);
+            box-shadow: 10px 10px 0px var(--cor-principal-sombra);
+            text-align: center;
+        }
+
+        .resultado.visivel { display: flex; }
+
+        .resultado_circulo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--cor-principal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cor-principal);
+        }
+
+        .resultado h2 {
+            font-family: var(--fonte-secundária);
+            color: var(--cor-secundária);
+            text-shadow: 2px 2px 0px var(--cor-secundária-sombra);
+            font-size: 0.85rem;
+        }
+
+        .resultado p { color: var(--cinza); }
+
+        .resultado button {
+            padding: 0.6em 1.5em;
+            background: var(--cor-principal);
+            border: none;
+            box-shadow: 4px 4px 0px var(--cor-principal-sombra);
+            color: var(--branco);
+            cursor: pointer;
+            font-family: var(--fonte-principal);
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+
+        .resultado button:hover { background: var(--cor-principal-sombra); }
+
+        /* Rodapé */
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--cor-principal);
+            padding: 2em 3em;
+            color: var(--preto);
+        }
+
+        .footer_primeira_parte {
+            display: flex;
+            flex-direction: column;
+            width: 25vw;
+            gap: 0.5em;
+            font-size: 0.9rem;
+        }
+
+        .footer_segunda_parte {
+            background-color: var(--branco);
+            display: flex;
+            align-items: center;
+            padding: 1em;
+            border: 3px solid var(--preto);
+            gap: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="conta.html">
+            <img src="imagens/logoUTFPR.png" alt="Logo da UTFPR" style="width: 7.5vw;">
+        </a>
+    </header>
+
+    <div class="principal">
+        <nav>
+            <a class="nav_item ativo" href="#">Questionário</a>
+        </nav>
+
+        <div class="conteudo">
+            <h1>Questionário: Trilha Arduino</h1>
+
+            <div class="progresso" id="progresso"></div>
+
+            <div id="questoes"></div>
+
+            <div class="quiz_nav" id="quiz_nav">
+                <button id="btn_anterior" onclick="irPara(atual - 1)" disabled>← anterior</button>
+                <span class="quiz_contador" id="contador">1 de 10</span>
+                <button id="btn_proxima" class="primario" onclick="irPara(atual + 1)">próxima →</button>
+            </div>
+
+            <div class="resultado" id="resultado">
+                <div class="resultado_circulo" id="resultado_circulo"></div>
+                <h2 id="resultado_titulo"></h2>
+                <p id="resultado_desc"></p>
+                <button onclick="reiniciar()">tentar novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer_primeira_parte">
+            <strong>Trabalho para a disciplina Fundamentos de Gestão de Projetos.</strong>
+            <p>Programação do site por Davi Carneiro Mendes com colaboração de: André Lourenço, Bruno Zanetti, Bernardo André, Eduardo Henrique e Iago Senegalia</p>
+        </div>
+        <div class="footer_segunda_parte">
+            <img src="imagens/logoUTFPR.png" alt="Logo da UTFPR" style="width: 5vw;">
+            <img src="imagens/cromo.png" alt="Logo da empresa júnior Cromo" style="width: 5vw;">
+        </div>
+    </footer>
+
+    <script>
+        const questoes = [
+            {
+                q: "O que é um Arduino?",
+                opts: [
+                    "Um sistema operacional para computadores",
+                    "Uma plataforma de hardware e software para prototipagem eletrônica",
+                    "Um tipo de transistor usado em circuitos integrados",
+                    "Um protocolo de comunicação sem fio"
+                ],
+                a: 1
+            },
+            {
+                q: "Qual a tensão de operação padrão do Arduino Uno?",
+                opts: ["3.3V", "12V", "5V", "9V"],
+                a: 2
+            },
+            {
+                q: "Quantos pinos de I/O digital possui o Arduino Uno?",
+                opts: ["10", "14", "20", "32"],
+                a: 1
+            },
+            {
+                q: "Qual função é responsável por configurar os pinos no Arduino?",
+                opts: ["loop()", "setup()", "main()", "init()"],
+                a: 1
+            },
+            {
+                q: "O que significa PWM?",
+                opts: [
+                    "Pulse Width Modulation",
+                    "Programmable Wire Module",
+                    "Power Width Management",
+                    "Pulse Wave Multiplexer"
+                ],
+                a: 0
+            },
+            {
+                q: "Qual função é usada para ler o valor de um pino analógico?",
+                opts: ["digitalRead()", "analogWrite()", "analogRead()", "pinRead()"],
+                a: 2
+            },
+            {
+                q: "Qual a resolução do conversor analógico-digital (ADC) do Arduino Uno?",
+                opts: ["8 bits", "10 bits", "12 bits", "16 bits"],
+                a: 1
+            },
+            {
+                q: "O que é o bootloader no contexto do Arduino?",
+                opts: [
+                    "Um programa que gerencia a memória RAM",
+                    "Um pequeno programa que permite gravar sketches via USB sem gravador externo",
+                    "O ambiente de desenvolvimento integrado (IDE)",
+                    "Um driver para comunicação Bluetooth"
+                ],
+                a: 1
+            },
+            {
+                q: "Qual protocolo de comunicação serial é usado entre o Arduino e periféricos como displays e sensores I2C?",
+                opts: ["SPI", "UART", "I2C", "CAN"],
+                a: 2
+            },
+            {
+                q: "Qual a corrente máxima recomendada por pino de GPIO no Arduino Uno?",
+                opts: ["20mA", "40mA", "100mA", "200mA"],
+                a: 0
+            }
+        ];
+
+        const letras = ["A", "B", "C", "D"];
+        let atual = 0;
+        const respostas = new Array(questoes.length).fill(null);
+
+        function renderizar() {
+            const qEl = document.getElementById("questoes");
+            const progEl = document.getElementById("progresso");
+            qEl.innerHTML = "";
+            progEl.innerHTML = "";
+
+            questoes.forEach((q, i) => {
+                const ponto = document.createElement("div");
+                ponto.className = "progresso_ponto" + (respostas[i] !== null ? " feito" : "");
+                progEl.appendChild(ponto);
+
+                const bloco = document.createElement("div");
+                bloco.className = "questao_card" + (i === atual ? " ativa" : "");
+                bloco.innerHTML = `
+                    <p class="questao_label">questão ${i + 1} de ${questoes.length}</p>
+                    <p class="questao_texto">${q.q}</p>
+                    <div class="opcoes">
+                        ${q.opts.map((o, j) => `
+                            <label>
+                                <input type="radio" name="q${i}" value="${j}"
+                                    ${respostas[i] === j ? "checked" : ""}
+                                    onchange="escolher(${i}, ${j})">
+                                <div class="opcao">
+                                    <span class="opcao_letra">${letras[j]}</span>${o}
+                                </div>
+                            </label>`).join("")}
+                    </div>`;
+                qEl.appendChild(bloco);
+            });
+
+            document.getElementById("contador").textContent = `${atual + 1} de ${questoes.length}`;
+            document.getElementById("btn_anterior").disabled = atual === 0;
+
+            const btnProxima = document.getElementById("btn_proxima");
+            if (atual === questoes.length - 1) {
+                btnProxima.textContent = "ver resultado ✓";
+                btnProxima.onclick = mostrarResultado;
+            } else {
+                btnProxima.textContent = "próxima →";
+                btnProxima.onclick = () => irPara(atual + 1);
+            }
+        }
+
+        function escolher(qi, val) {
+            respostas[qi] = val;
+            renderizar();
+        }
+
+        function irPara(i) {
+            if (i >= 0 && i < questoes.length) { atual = i; renderizar(); }
+        }
+
+        function mostrarResultado() {
+            const acertos = respostas.reduce((acc, r, i) => acc + (r === questoes[i].a ? 1 : 0), 0);
+            document.getElementById("quiz_nav").style.display = "none";
+            document.getElementById("questoes").style.display = "none";
+            document.getElementById("progresso").style.display = "none";
+
+            const res = document.getElementById("resultado");
+            res.classList.add("visivel");
+            document.getElementById("resultado_circulo").textContent = `${acertos}/10`;
+
+            const titulos = ["continue praticando!", "bom esforço!", "muito bem!", "excelente!", "perfeito!"];
+            const t = acertos <= 2 ? 0 : acertos <= 4 ? 1 : acertos <= 6 ? 2 : acertos <= 8 ? 3 : 4;
+            document.getElementById("resultado_titulo").textContent = titulos[t];
+            document.getElementById("resultado_desc").textContent = `você acertou ${acertos} de 10 questões na Trilha Arduino.`;
+        }
+
+        function reiniciar() {
+            respostas.fill(null);
+            atual = 0;
+            document.getElementById("quiz_nav").style.display = "flex";
+            document.getElementById("questoes").style.display = "block";
+            document.getElementById("progresso").style.display = "flex";
+            document.getElementById("resultado").classList.remove("visivel");
+            renderizar();
+        }
+
+        renderizar();
+    </script>
+</body>
+</html>

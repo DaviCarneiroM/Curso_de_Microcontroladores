@@ -123,6 +123,115 @@ header {
     text-shadow: 2px 2px 0px var(--cinza);
 }
 
+/*Sobre nos*/
+
+.sobre_nos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    gap: 3em;
+}
+
+.sobre_nos_título {
+    font-family: var(--fonte-secundária);
+    color: var(--cor-secundária);
+    text-shadow: 4px 4px 0px var(--cor-secundária-sombra);
+}
+
+.sobre_nos_principal {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.sobre_nos_cima {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.sobre_nos_baixo {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+.sobre_nos_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25em;
+}
+
+/*Nossas aulas*/
+
+.nossas_aulas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3em;
+    height: 100vh;
+    background-color: var(--preto);
+    box-shadow: 0px 0px 100px var(--preto);
+}
+
+.nossas_aulas_título {
+    font-family: var(--fonte-secundária);
+    color: var(--cor-principal);
+    text-shadow: 4px 4px 0px var(--cor-principal-sombra);
+}
+
+.nossas_aulas_conteúdo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3em; 
+    width: 75vw;
+}
+
+.nossas_aulas_imagem {
+    box-shadow: 8px 8px 0px var(--cor-principal-sombra);
+    width: 35vw;
+}
+
+/*Investimentos*/
+
+.investimentos {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3em;
+    height: 100vh;
+}
+
+.investimentos_título {
+    font-family: var(--fonte-secundária);
+    color: var(--cor-secundária);
+    text-shadow: 4px 4px 0px var(--cor-secundária-sombra);
+}
+
+.investimentos_conteúdo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2em;
+    width: 90vw;
+}
+
+.investimentos_container {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: var(--cor-principal);
+    padding: 1em;
+    box-shadow: 10px 10px 0px var(--cor-principal-sombra);
+}
+
 /*Rodapé*/
 
 footer {
